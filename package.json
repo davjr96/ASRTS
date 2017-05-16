@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "restart": "pm2 startOrRestart ecosystem.config.js",
-    "deploy": "pm2 deploy ecosystem.config.js production",
+    "restart": "sudo pm2 startOrRestart ecosystem.config.js",
+    "deploy": "sudo pm2 deploy ecosystem.config.js production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
