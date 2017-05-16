@@ -1,4 +1,4 @@
-/media/danny/Windows/Users/Danny/OneDrive/Documents/electronics/Timer
+
 module.exports = {
   apps: [{
     name: 'asrts',
@@ -8,7 +8,7 @@ module.exports = {
     production: {
       user: 'ubuntu',
       host: 'vassttimes.com',
-      key: '/media/danny/Windows/Users/Danny/OneDrive/Documents/electronics/Timer',
+      key: '/media/danny/Windows/Users/Danny/OneDrive/Documents/electronics/Timer/ASRTS.pem',
       ref: 'origin/master',
       repo: 'git@github.com:davjr96/ASRTS.git',
       path: '/home/ubuntu/ASRTS',
