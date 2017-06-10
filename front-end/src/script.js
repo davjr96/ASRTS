@@ -1,5 +1,5 @@
 // create the module and name it app
-var app = angular.module('app', ['ngRoute', 'ui.grid','ui.grid.autoResize']);
+var app = angular.module('app', ['ngRoute', 'ui.grid', 'ui.grid.autoResize']);
 
 // configure our routes
 app.config(function($routeProvider) {
@@ -14,8 +14,8 @@ app.controller('mainController', function($scope, $http, uiGridConstants) {
     $http.get("/api/races")
         .then(function(response) {
             $scope.races = response.data;
-              $scope.gridOptions.data = $scope.races[0].times;
-              $scope.selectedRace = $scope.races[0]
+            $scope.gridOptions.data = $scope.races[0].times;
+            $scope.selectedRace = $scope.races[0]
         });
 
 
@@ -32,7 +32,11 @@ app.controller('mainController', function($scope, $http, uiGridConstants) {
                 field: 'run2'
             },
             {
-                field: 'combined'
+                field: 'combined',
+                sort: {
+                    direction: uiGridConstants.ASC,
+                    priority: 0,
+                }
             }
         ]
     };
