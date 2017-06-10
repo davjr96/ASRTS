@@ -1,0 +1,14 @@
+<div class="jumbotron text-center">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<select ng-model="selectedRace" ng-options="x.name for x in races" ng-change="selectRace()"></select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div ui-grid="gridOptions" class="ui-grid-auto-resize" ></div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -7,7 +7,7 @@ const db             = require('./config/db');
 const app            = express();
 const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'))
+app.use(express.static('front-end/src'))
 
 MongoClient.connect(db.url, (err, database) => {
   if (err) return console.log(err)
