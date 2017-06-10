@@ -8,41 +8,47 @@ app.config(function($routeProvider) {
             templateUrl: 'pages/home.html',
             controller: 'mainController'
         })
+        .when('/races', {
+            templateUrl: 'pages/races.html',
+            controller: 'raceController'
+        })
+});
+app.controller('mainController', function($scope) {
 });
 
-app.controller('mainController', function($scope, $http, uiGridConstants) {
-    $http.get("/api/races")
-        .then(function(response) {
-            $scope.races = response.data;
-            $scope.gridOptions.data = $scope.races[0].times;
-            $scope.selectedRace = $scope.races[0]
-        });
+app.controller('raceController', function($scope, $http, uiGridConstants) {
+  $http.get("/api/races")
+      .then(function(response) {
+          $scope.races = response.data;
+          $scope.gridOptions.data = $scope.races[0].times;
+          $scope.selectedRace = $scope.races[0]
+      });
 
 
-    $scope.gridOptions = {
-        enableFiltering: true,
-        rowHeight: 45,
-        columnDefs: [{
-                field: 'racer'
-            },
-            {
-                field: 'run1'
-            },
-            {
-                field: 'run2'
-            },
-            {
-                field: 'combined',
-                sort: {
-                    direction: uiGridConstants.ASC,
-                    priority: 0,
-                }
-            }
-        ]
-    };
+  $scope.gridOptions = {
+      enableFiltering: true,
+      rowHeight: 45,
+      columnDefs: [{
+              field: 'racer'
+          },
+          {
+              field: 'run1'
+          },
+          {
+              field: 'run2'
+          },
+          {
+              field: 'combined',
+              sort: {
+                  direction: uiGridConstants.ASC,
+                  priority: 0,
+              }
+          }
+      ]
+  };
 
-    $scope.selectRace = function() {
-        $scope.gridOptions.data = $scope.selectedRace.times;
-    }
+  $scope.selectRace = function() {
+      $scope.gridOptions.data = $scope.selectedRace.times;
+  }
 
 });
