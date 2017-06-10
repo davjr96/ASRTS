@@ -21,10 +21,10 @@ module.exports = function(app, db) {
     });
   });
 
-  app.get('/times', (req, res) => {
-    db.collection('times').find().toArray(function(err, users) {
-      if (err) return res.status(500).send("There was a problem finding the users.");
-      res.status(200).send(users);
+  app.get('/races', (req, res) => {
+    db.collection('races').find().toArray(function(err, races) {
+      if (err) return res.status(500).send("There was a problem finding the races.");
+      res.status(200).send(races);
     });
   });
 };
