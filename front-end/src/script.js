@@ -12,10 +12,15 @@ app.config(function($routeProvider) {
             templateUrl: 'pages/races.html',
             controller: 'raceController'
         })
+        .when('/practices', {
+            templateUrl: 'pages/practices.html',
+            controller: 'practiceController'
+        })
 });
 app.controller('mainController', function($scope) {
 });
-
+app.controller('practiceController', function($scope) {
+});
 app.controller('raceController', function($scope, $http, uiGridConstants) {
   $http.get("/api/races")
       .then(function(response) {
