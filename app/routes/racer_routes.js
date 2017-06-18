@@ -1,3 +1,4 @@
+const _ = require('lodash')
 
 module.exports = function(app, db) {
   var ObjectId = require('mongodb').ObjectID;
@@ -27,12 +28,24 @@ module.exports = function(app, db) {
   app.get('/api/races', (req, res) => {
     db.collection('races').find().toArray(function(err, races) {
       if (err) return res.status(500).send("There was a problem finding the races.");
+      for (var i = 0; i < races.length; i++) {
+        time = races[i].times;
+        //races[i].times = _.sortBy(time, [function(o) { return o.combined; }]);
+        races[i].times = time.sort(function(a, b) {
+          if (a.combined === "" || a.combined === null) return 1;
+          if (b.combined === "" || b.combined === null) return -1;
+          if (a.combined === b.combined) return 0;
+          return a.combined < b.combined ? -1 : 1;
+        });
+      }
       res.status(200).send(races);
     });
   });
 
   app.get('/api/race/:Id/', (req, res) => {
-    db.collection('races').find({"_id" : ObjectId(req.params['Id'])}).toArray(function(err, races) {
+    db.collection('races').find({
+      "_id": ObjectId(req.params['Id'])
+    }).toArray(function(err, races) {
       if (err) return res.status(500).send("There was a problem finding the races.");
       res.status(200).send(races);
     });
