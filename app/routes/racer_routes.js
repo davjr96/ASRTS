@@ -29,9 +29,7 @@ module.exports = function(app, db) {
     db.collection('races').find().toArray(function(err, races) {
       if (err) return res.status(500).send("There was a problem finding the races.");
       for (var i = 0; i < races.length; i++) {
-        time = races[i].times;
-        //races[i].times = _.sortBy(time, [function(o) { return o.combined; }]);
-        races[i].times = time.sort(function(a, b) {
+        races[i].times = races[i].times.sort(function(a, b) {
           if (a.combined === "" || a.combined === null) return 1;
           if (b.combined === "" || b.combined === null) return -1;
           if (a.combined === b.combined) return 0;

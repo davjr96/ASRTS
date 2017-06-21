@@ -1,90 +1,51 @@
-import React, {
-  Component
-} from 'react';
-import logo from './logo.svg';
-import './App.css';
-import 'whatwg-fetch'
-import ReactTable from 'react-table'
-import 'react-table/react-table.css'
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 
-class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      selected: 0,
-      viewing: {}
-    };
-  }
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+import Races from './Races';
+import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
-  componentDidMount() {
-    fetch('/api/races')
-      .then(function(response) {
-        return response.json()
-      }).then((json) => {
-        this.setState({
-          data: json,
-          viewing: json[0]
-        });
-      }).catch(function(ex) {
-        console.log('parsing failed', ex)
-      })
-  }
+const Home = () => (
+  <div>
+    <h2>Home</h2>
+  </div>
+)
 
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
+const App = () => (
 
-  handleChange(e) {
-    this.setState({
-      viewing: this.state.data[e.value],
-      selected : e.value
-    });
-  }
 
-  render() {
+  <Router>
+  <div>
 
-    const columns = [{
-      Header: 'Name',
-      accessor: 'racer'
-    }, {
-      Header: 'Run 1',
-      accessor: 'run1',
-    }, {
-      Header: 'Run 2',
-      accessor: 'run2',
-    }, {
-      Header: 'Combined',
-      accessor: 'combined',
-    }]
+  <Navbar inverse collapseOnSelect>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <a href="#">React-Bootstrap</a>
+      </Navbar.Brand>
+      <Navbar.Toggle />
+    </Navbar.Header>
+    <Navbar.Collapse>
+    <Nav>
+    <LinkContainer to="/">
+      <NavItem>Home</NavItem>
+      </LinkContainer>
+      <LinkContainer to="/races">
+      <NavItem>Races</NavItem>
+      </LinkContainer>
 
-    var options = []
-    for (var i = 0; i < this.state.data.length; i++) {
-      options.push({
-        value: i,
-        label: this.state.data[i].name
-      })
-    }
-
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Select value={this.state.selected} options={options} onChange={(e) => this.handleChange(e)}/>
-        <ReactTable data={this.state.viewing.times} columns={columns}/>
+    </Nav>
+    </Navbar.Collapse>
+ </Navbar>
+      <hr/>
+      <Route exact path="/" component={Home}/>
+      <Route path="/races" component={Races}/>
       </div>
 
-    );
-  }
-}
-
-
-export default App;
+  </Router>
+)
+export default App
