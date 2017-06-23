@@ -3,11 +3,10 @@
 import React from 'react'
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'
 import Races from './Races';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Nav, Navbar, NavItem} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const Home = () => (
@@ -17,35 +16,25 @@ const Home = () => (
 )
 
 const App = () => (
-
-
-  <Router>
+<Router>
   <div>
-
-  <Navbar inverse collapseOnSelect>
-    <Navbar.Header>
-      <Navbar.Brand>
-        <a href="#">React-Bootstrap</a>
-      </Navbar.Brand>
-      <Navbar.Toggle />
-    </Navbar.Header>
-    <Navbar.Collapse>
-    <Nav>
-    <LinkContainer to="/">
-      <NavItem>Home</NavItem>
-      </LinkContainer>
-      <LinkContainer to="/races">
-      <NavItem>Races</NavItem>
-      </LinkContainer>
-
-    </Nav>
-    </Navbar.Collapse>
- </Navbar>
-      <hr/>
+    <Navbar inverse collapseOnSelect>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <a href="/">VASST Times</a>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            <LinkContainer to="/"><NavItem>Home</NavItem></LinkContainer>
+            <LinkContainer to="/races"><NavItem>Races</NavItem></LinkContainer>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
       <Route exact path="/" component={Home}/>
       <Route path="/races" component={Races}/>
-      </div>
-
+    </div>
   </Router>
 )
 export default App

@@ -1,13 +1,13 @@
 import React, {
   Component
 } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import 'whatwg-fetch'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import {Row, Col } from 'react-bootstrap';
 
 class Races extends Component {
 
@@ -70,13 +70,21 @@ class Races extends Component {
     }
 
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <Select value={this.state.selected} options={options} onChange={(e) => this.handleChange(e)}/>
-        <ReactTable data={this.state.viewing.times} columns={columns}/>
+      <div className="Races">
+          <Row>
+            <Col md={2}></Col>
+            <Col md={8}>
+                <Select value={this.state.selected} options={options} onChange={(e) => this.handleChange(e)}/>
+              </Col>
+            <Col md={2}></Col>
+          </Row>
+          <Row>
+            <Col md={2}></Col>
+            <Col md={8}>
+              <ReactTable className="-striped -highlight" data={this.state.viewing.times} columns={columns}/>
+            </Col>
+            <Col md={2}></Col>
+          </Row>
       </div>
 
     );
