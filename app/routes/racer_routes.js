@@ -8,7 +8,7 @@ module.exports = function(app, db) {
       racer: req.body.racer,
       time: req.body.time
     };
-    db.collection("times").insert(time, (err, result) => {
+    db.collection("live").insert(time, (err, result) => {
       if (err) {
         res.send({
           error: "An error has occurred"
@@ -16,12 +16,6 @@ module.exports = function(app, db) {
       } else {
         res.send(result.ops[0]);
       }
-    });
-  });
-
-  app.get("/api/delete", (req, res) => {
-    db.collection("times", function(err, collection) {
-      collection.remove({}, function(err, removed) {});
     });
   });
 
@@ -41,16 +35,19 @@ module.exports = function(app, db) {
     });
   });
 
-  app.get("/api/race/:Id/", (req, res) => {
-    db
-      .collection("races")
-      .find({
-        _id: ObjectId(req.params["Id"])
-      })
-      .toArray(function(err, races) {
-        if (err)
-          return res.status(500).send("There was a problem finding the races.");
-        res.status(200).send(races);
-      });
+  app.get("/api/practices", (req, res) => {
+    db.collection("races").find().toArray(function(err, practices) {
+      if (err)
+        return res.status(500).send("There was a problem finding the practices.");
+      res.status(200).send(practices);
+    });
+  });
+
+  app.get("/api/live", (req, res) => {
+    db.collection("live").find().toArray(function(err, times) {
+      if (err)
+        return res.status(500).send("There was a problem finding the live times.");
+      res.status(200).send(times);
+    });
   });
 };
