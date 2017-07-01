@@ -8,14 +8,13 @@ import "react-table/react-table.css";
 class Home extends Component {
   constructor(props) {
     super(props);
+    this.loadData = this.loadData.bind(this);
     this.state = {
-      data: [],
-      selected: 0,
-      viewing: {}
+      data: []
     };
   }
 
-  componentDidMount() {
+  loadData() {
     fetch("/api/live")
       .then(function(response) {
         return response.json();
@@ -28,6 +27,10 @@ class Home extends Component {
       .catch(function(ex) {
         console.log("parsing failed", ex);
       });
+  }
+  componentDidMount() {
+    this.loadData();
+    setInterval(this.loadData, 5000);
   }
 
   componentWillUnmount() {
